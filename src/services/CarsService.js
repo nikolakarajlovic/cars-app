@@ -33,13 +33,25 @@ class CarService {
     return true
   }
 
-  create(newCar) {
-      this.cars.push({id: this.nextId, ...newCar, products: []});
+//   create(newCar) {
+//       this.cars.push({id: this.nextId, ...newCar, products: []});
 
-      this.nextId++;
+//       this.nextId++;
 
-      return this.cars[this.cars.length-1];
-  }
+//       return this.cars[this.cars.length-1];
+//   }
+
+  async add(newCar) {
+      // dovrsiti
+    try {
+      const {data} = await this.client.post('api/cars');
+      return data;
+    } catch (error) {
+      console.log('Greska', error)
+    }
+
+    return []
+}
 
   get(id) {
     return this.cars.find(c => c.id === Number(id))
